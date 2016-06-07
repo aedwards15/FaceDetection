@@ -1,0 +1,23 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 2012
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FaceDetection", "FaceDetection\FaceDetection.csproj", "{F6D136F2-D50A-4BB3-93A5-26D29933E82E}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|iPhoneSimulator = Debug|iPhoneSimulator
+		Release|iPhone = Release|iPhone
+		Release|iPhoneSimulator = Release|iPhoneSimulator
+		Debug|iPhone = Debug|iPhone
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{F6D136F2-D50A-4BB3-93A5-26D29933E82E}.Debug|iPhone.ActiveCfg = Debug|iPhone
+		{F6D136F2-D50A-4BB3-93A5-26D29933E82E}.Debug|iPhone.Build.0 = Debug|iPhone
+		{F6D136F2-D50A-4BB3-93A5-26D29933E82E}.Debug|iPhoneSimulator.ActiveCfg = Debug|iPhoneSimulator
+		{F6D136F2-D50A-4BB3-93A5-26D29933E82E}.Debug|iPhoneSimulator.Build.0 = Debug|iPhoneSimulator
+		{F6D136F2-D50A-4BB3-93A5-26D29933E82E}.Release|iPhone.ActiveCfg = Release|iPhone
+		{F6D136F2-D50A-4BB3-93A5-26D29933E82E}.Release|iPhone.Build.0 = Release|iPhone
+		{F6D136F2-D50A-4BB3-93A5-26D29933E82E}.Release|iPhoneSimulator.ActiveCfg = Release|iPhoneSimulator
+		{F6D136F2-D50A-4BB3-93A5-26D29933E82E}.Release|iPhoneSimulator.Build.0 = Release|iPhoneSimulator
+	EndGlobalSection
+EndGlobal
