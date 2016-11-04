@@ -68,28 +68,28 @@
     <CodesignEntitlements>Entitlements.plist</CodesignEntitlements>
     <MtouchFloat32>true</MtouchFloat32>
     <CodesignKey>iPhone Developer: anduril28@gmail.com (82L9B8Z4G4)</CodesignKey>
-    <DeviceSpecificBuild>true</DeviceSpecificBuild>
+    <DeviceSpecificBuild>false</DeviceSpecificBuild>
     <MtouchDebug>true</MtouchDebug>
     <MtouchUseSGen>true</MtouchUseSGen>
     <MtouchUseRefCounting>true</MtouchUseRefCounting>
     <MtouchProfiling>true</MtouchProfiling>
     <IpaPackageName>
     </IpaPackageName>
-    <CodesignProvision>f2e99149-b5c9-41f1-b131-d1d89bbf6549</CodesignProvision>
+    <CodesignProvision>773b2d99-27d2-4ec7-86f4-6bd0e06caea8</CodesignProvision>
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="System" />
     <Reference Include="System.Xml" />
     <Reference Include="System.Core" />
     <Reference Include="Xamarin.iOS" />
-    <Reference Include="Emgu.CV.iOS">
-      <HintPath>..\..\..\..\..\Downloads\ios-package\Emgu.CV\bin\Debug\Emgu.CV.iOS.dll</HintPath>
-    </Reference>
-    <Reference Include="Emgu.Util.iOS">
-      <HintPath>..\..\..\..\..\Downloads\ios-package\Emgu.CV\bin\Debug\Emgu.Util.iOS.dll</HintPath>
-    </Reference>
     <Reference Include="OpenTK-1.0" />
     <Reference Include="MonoTouch.Dialog-1" />
+    <Reference Include="Emgu.CV.iOS">
+      <HintPath>..\..\..\..\Downloads\ios-package\Emgu.CV\bin\Debug\Emgu.CV.iOS.dll</HintPath>
+    </Reference>
+    <Reference Include="Emgu.Util.iOS">
+      <HintPath>..\..\..\..\Downloads\ios-package\Emgu.CV\bin\Debug\Emgu.Util.iOS.dll</HintPath>
+    </Reference>
   </ItemGroup>
   <ItemGroup>
     <InterfaceDefinition Include="Resources\LaunchScreen.xib" />
@@ -115,17 +115,12 @@
   </ItemGroup>
   <Import Project="$(MSBuildExtensionsPath)\Xamarin\iOS\Xamarin.iOS.CSharp.targets" />
   <ItemGroup>
-    <Content Include="haarcascade_eye.xml" />
-    <Content Include="haarcascade_frontalface_default.xml" />
-    <Content Include="HS.xml" />
     <Content Include="haarcascade_frontalface_alt.xml" />
     <Content Include="haarcascade_lefteye_2splits.xml" />
     <Content Include="haarcascade_righteye_2splits.xml" />
     <Content Include="haarcascade_lowerbody.xml" />
-    <Content Include="haarcascade_upperbody.xml" />
     <Content Include="Mouth.xml" />
     <Content Include="Nariz.xml" />
-    <Content Include="Nariz_nuevo_20stages.xml" />
     <Content Include="haarcascade_fullbody.xml" />
     <Content Include="haarcascade_mcs_upperbody.xml" />
   </ItemGroup>
