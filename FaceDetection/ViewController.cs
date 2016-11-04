@@ -11,6 +11,7 @@ using System.Collections.Generic;
 using System.Drawing;
 using CoreImage;
 using Emgu.CV.Util;
+using System.IO;
 
 namespace FaceDetection
 {
@@ -178,7 +179,7 @@ namespace FaceDetection
                             if (rect.IntersectsWith(eye))
                             {
                                 isFace = false;
-                                messageLabel.Text = String.Format("Left Eye: (x: {0}, y: {1}, w: {2}, h: {3})", eye.X, (imageView.Image.Size.Height - (eye.Y - eye.Height)), eye.Width, eye.Height);
+                                messageLabel.Text = String.Format("Left Eye: (x: {0}, y: {1}, w: {2}, h: {3})", eye.X, (imageView.Image.Size.Height - (eye.Y + eye.Height)), eye.Width, eye.Height);
                             }
                         }
 
@@ -226,6 +227,7 @@ namespace FaceDetection
             imagePicker.DismissModalViewController(true);
         }
 
+        private String imageURL = String.Empty;
         // This is a sample method that handles the FinishedPickingMediaEvent
         protected void Handle_FinishedPickingMedia(object sender, UIImagePickerMediaPickedEventArgs e)
         {
@@ -246,7 +248,8 @@ namespace FaceDetection
             Console.Write("Reference URL: [" + UIImagePickerController.ReferenceUrl + "]");
 
             // get common info (shared between images and video)
-            NSUrl referenceURL = e.Info[new NSString("UIImagePickerControllerReferenceUrl")] as NSUrl;
+            NSUrl referenceURL = e.Info[new NSString("UIImagePickerControllerReferenceURL")] as NSUrl;
+            imageURL = referenceURL.AbsoluteString;
             if(referenceURL != null)
                 Console.WriteLine(referenceURL.ToString());
 
@@ -368,6 +371,33 @@ namespace FaceDetection
                     
                     imageView.Image = fullImage.ToUIImage();
                 }
+
+                var FileManager = new NSFileManager ();
+                var appGroupContainer = FileManager.GetContainerUrl ("group.com.AngryElfStudios.PhotoData");
+                var appGroupContainerPath = appGroupContainer.Path;
+
+
+                var filename = Path.Combine (appGroupContainerPath, "Data.txt");
+                Console.WriteLine ("Group Path: " + filename);
+
+                String dataToWrite = imageURL + "\n";
+                dataToWrite += faces [0].X + "," + (imageView.Image.Size.Height - (faces [0].Y + faces [0].Height)) + "," + faces [0].Width + "," + faces [0].Height + "\n";
+                dataToWrite += leftEyes [0].X + "," + (imageView.Image.Size.Height - (leftEyes [0].Y + leftEyes [0].Height)) + "," + leftEyes [0].Width + "," + leftEyes [0].Height + "\n";
+                dataToWrite += rightEyes [0].X + "," + (imageView.Image.Size.Height - (rightEyes [0].Y + rightEyes [0].Height)) + "," + rightEyes [0].Width + "," + rightEyes [0].Height + "\n";
+                dataToWrite += mouths [0].X + "," + (imageView.Image.Size.Height - (mouths [0].Y + mouths [0].Height)) + "," + mouths [0].Width + "," + mouths [0].Height + "\n";
+                dataToWrite += noses [0].X + "," + (imageView.Image.Size.Height - (noses [0].Y + noses [0].Height)) + "," + noses [0].Width + "," + noses [0].Height + "\n";
+
+                if (File.Exists (filename)) {
+                    File.Delete (filename);
+                }
+
+
+                File.WriteAllText (filename, dataToWrite);
+
+                var documents = Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments);
+                filename = Path.Combine (documents, "Data.txt");
+                File.WriteAllText (filename, dataToWrite);
+
             }
         }
 
@@ -377,6 +407,14 @@ namespace FaceDetection
             if (originalImage != null)
             {
                 imageView.Image = originalImage;
+            }
+        }
+
+        partial void FeatureMap_TouchUpInside (UIButton sender)
+        {
+            if (!UIApplication.SharedApplication.OpenUrl (NSUrl.FromString ("iOSDevTips://com.AngryElfStudios.FeatureMapping"))) {
+                //Use the code below to go to itunes if application not found.
+                UIApplication.SharedApplication.OpenUrl (NSUrl.FromString ("itms://itunes.apple.com/in/app/appname/appid"));
             }
         }
 	}
