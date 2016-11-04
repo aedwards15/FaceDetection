@@ -46,11 +46,23 @@ namespace FaceDetection
             UMat hierarchy = new UMat();
             CvInvoke.FindContours(cannyEdges, contourEdges, hierarchy, 0, ChainApproxMethod.ChainApproxNone);
 
+            VectorOfVectorOfPoint newContourEdges = new VectorOfVectorOfPoint ();
+            for (int i = 0; i < contourEdges.Size; i++)
+            {
+                if (contourEdges [i].Size > 3000) 
+                {
+                    newContourEdges.Push (contourEdges [i]);
+                }
+            }
+
+            contourEdges.Dispose ();
+
             VectorOfPoint test1 = new VectorOfPoint();
             VectorOfVectorOfPoint temp = new VectorOfVectorOfPoint();
-            temp.Push(contourEdges[0]);
-            for (int i = 0; i < contourEdges.Size; i++) {
-                temp[0].Push(contourEdges[i].ToArray());
+            temp.Push(newContourEdges [0]);
+            for (int i = 0; i < newContourEdges.Size; i++) {
+                Point[] testing = newContourEdges [i].ToArray ();
+                temp[0].Push(newContourEdges [i].ToArray());
             }
 
             VectorOfVectorOfPoint hull = new VectorOfVectorOfPoint(1);
@@ -157,7 +169,7 @@ namespace FaceDetection
             //imageView.Image = lineImage;
             #endregion
 
-            return value ? hull : contourEdges; //lineImage.ToUIImage();
+            return value ? hull : newContourEdges; //lineImage.ToUIImage();
         }
     }
 }
